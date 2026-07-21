@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>I'm Sorry ❤️</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+body{
+height:100vh;overflow:hidden;display:flex;justify-content:center;align-items:center;
+background:linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.55)),url("photo.jpg");
+background-size:cover;background-position:center;color:#fff;
+}
+.container{text-align:center;position:relative;z-index:2}
+#heart{position:relative;width:340px;height:320px;margin:0 auto;animation:beat 1.2s infinite}
+.word{position:absolute;font-size:16px;font-weight:bold;color:#fff;text-shadow:0 0 10px #ff2d55}
+@keyframes beat{50%{transform:scale(1.08)}}
+.typing{margin-top:45px;font-size:30px;font-weight:bold;text-shadow:0 0 12px #ff2d55;min-height:40px}
+button{margin-top:25px;padding:15px 35px;border:none;border-radius:40px;font-size:22px;font-weight:bold;cursor:pointer;background:#fff;color:#ff2d55;box-shadow:0 0 20px #fff}
+button:hover{transform:scale(1.05)}
+#popup{display:none;margin-top:25px;font-size:28px;font-weight:bold}
+.float{position:fixed;bottom:-30px;animation:up linear forwards}
+@keyframes up{to{transform:translateY(-110vh) rotate(360deg);opacity:0}}
+.spark{position:fixed;width:4px;height:4px;border-radius:50%;background:#fff;box-shadow:0 0 10px #fff;animation:twinkle 2s infinite}
+@keyframes twinkle{50%{opacity:.2}}
+</style>
+</head>
+<body>
+
+<audio id="music" loop>
+<source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<div class="container">
+<div id="heart"></div>
+<div class="typing" id="typing"></div>
+<button onclick="forgive()">❤️ Forgive Me ❤️</button>
+<div id="popup">🥹 Thank You Qt ❤️<br> Kitti pyari h tu agr nai krti maaf phir bhi pyari hi hoti for me ofc 😌🤌 </div>
+</div>
+
+<script>
+document.addEventListener("click",()=>{music.play();},{once:true});
+
+const heart=document.getElementById("heart");
+const scale=10.5;
+for(let t=0;t<Math.PI*2;t+=0.13){
+ let x=16*Math.pow(Math.sin(t),3);
+ let y=13*Math.cos(t)-5*Math.cos(2*t)-2*Math.cos(3*t)-Math.cos(4*t);
+ let s=document.createElement("span");
+ s.className="word";
+ s.innerHTML="SORRY ❤️";
+ s.style.left=(170+x*scale)+"px";
+ s.style.top=(135-y*scale)+"px";
+ heart.appendChild(s);
+}
+
+const msg="I'm Really Really Sorry my cute little Qt 🥺❤️ Please Forgive Me...";
+let i=0;
+(function type(){
+ if(i<msg.length){
+   typing.textContent+=msg.charAt(i++);
+   setTimeout(type,80);
+ }
+})();
+
+function forgive(){
+ popup.style.display="block";
+ for(let i=0;i<120;i++){
+   let e=document.createElement("div");
+   e.textContent=Math.random()>0.5?"💖":"✨";
+   e.style.position="fixed";
+   e.style.left=Math.random()*100+"vw";
+   e.style.top="-20px";
+   e.style.fontSize=(14+Math.random()*18)+"px";
+   e.style.transition="4s linear";
+   document.body.appendChild(e);
+   setTimeout(()=>{e.style.transform="translateY(120vh) rotate(720deg)";},20);
+   setTimeout(()=>e.remove(),4200);
+ }
+}
+
+setInterval(()=>{
+ let h=document.createElement("div");
+ h.className="float";
+ h.textContent="❤️";
+ h.style.left=Math.random()*100+"vw";
+ h.style.fontSize=(14+Math.random()*28)+"px";
+ h.style.animationDuration=(4+Math.random()*5)+"s";
+ document.body.appendChild(h);
+ setTimeout(()=>h.remove(),9000);
+},250);
+
+for(let i=0;i<40;i++){
+ let s=document.createElement("div");
+ s.className="spark";
+ s.style.left=Math.random()*100+"vw";
+ s.style.top=Math.random()*100+"vh";
+ s.style.animationDelay=(Math.random()*2)+"s";
+ document.body.appendChild(s);
+}
+</script>
+</body>
+</html>
